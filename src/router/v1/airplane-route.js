@@ -5,6 +5,7 @@ const { AirplaneMiddlewares } = require('../../middlewares');
 
 const router = express.Router();
 
+console.log('step1 router', );
 // /api/v1/airplanes POST
 router.post('/', 
         AirplaneMiddlewares.validateCreateRequest,

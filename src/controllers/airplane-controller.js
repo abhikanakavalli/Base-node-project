@@ -8,31 +8,35 @@ const { SuccessResponse, ErrorResponse } = require('../utils/common');
  * req-body {modelNumber: 'airbus320', capacity: 200}
  */
 async function createAirplane(req, res) {
-    console.log('aa', req.body)
+    console.log('2. createAirplane Controller');
+    console.log('aa', req.body);
+
     try {
         const airplane = await AirplaneService.createAirplane({
             modelNumber: req.body.modelNumber,
             capacity: req.body.capacity
         });
-        // SuccessResponse.data = airplane;
+        SuccessResponse.data = airplane;
         return res
                 .status(StatusCodes.CREATED)
-                .json({
-                    success: true,
-                    message: 'Successfully created Airplane',
-                    data: airplane,
-                    error: {}
-                });
+                .json(successResponse);
+                // .json({
+                //     success: true,
+                //     message: 'Successfully created Airplane',
+                //     data: airplane,
+                //     error: {}
+                // });
     } catch(error) {
-        // ErrorResponse.error = error;
+        ErrorResponse.error = error;
         return res
                 .status(StatusCodes.INTERNAL_SERVER_ERROR)
-                .json({
-                        success: false,
-                        message: 'Something went wrong creating Airplane',
-                        data: {},
-                        error: error
-                    });
+                .json(ErrorResponse);
+                // .json({
+                //         success: false,
+                //         message: 'Something went wrong creating Airplane',
+                //         data: {},
+                //         error: error
+                //     });
     }
 }
 
